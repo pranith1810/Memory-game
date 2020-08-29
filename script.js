@@ -1,4 +1,5 @@
 const gameContainer = document.getElementById("game");
+let boxes = gameContainer.children;
 
 const COLORS = [
   "red",
@@ -61,25 +62,32 @@ let previousTarget = null;
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  // console.log("you clicked",event.target);
-
   event.target.style.backgroundColor = event.target.classList[0];
 
   if (previousTarget === null){
     previousTarget = event.target;
-    console.log(previousTarget);
   }
   else{
-    console.log(previousTarget);
-    console.log(event.target);
     if(previousTarget.classList[0] === event.target.classList[0]){
       previousTarget = null;
+      let flag=1;
+      for(let box of boxes){
+        if(box.style.backgroundColor === ""){
+          flag=0;
+          break;
+        }
+      }
+      if(flag === 1){
+        setTimeout(()=>{
+          alert("You have won the game!!!!");
+        },1);
+        
+      }
     }
     else{
-      
       setTimeout(()=>{
-        previousTarget.style.backgroundColor = 'white';
-        event.target.style.backgroundColor = 'white';
+        previousTarget.style.backgroundColor = "";
+        event.target.style.backgroundColor = "";
         previousTarget = null;
       }, 1000);
     }
