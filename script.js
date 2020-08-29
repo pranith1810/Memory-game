@@ -64,31 +64,37 @@ function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   event.target.style.backgroundColor = event.target.classList[0];
 
-  if (previousTarget === null){
+  if (previousTarget === null) {
     previousTarget = event.target;
   }
-  else{
-    if(previousTarget.classList[0] === event.target.classList[0]){
+  else {
+    if (previousTarget.classList[0] === event.target.classList[0]) {
       previousTarget = null;
-      let flag=1;
-      for(let box of boxes){
-        if(box.style.backgroundColor === ""){
-          flag=0;
+      let flag = 1;
+      for (let box of boxes) {
+        if (box.style.backgroundColor === "") {
+          flag = 0;
           break;
         }
       }
-      if(flag === 1){
-        setTimeout(()=>{
+      if (flag === 1) {
+        setTimeout(() => {
           alert("You have won the game!!!!");
-        },1);
-        
+        }, 1);
+
       }
     }
-    else{
-      setTimeout(()=>{
+    else {
+      for (let box of boxes) {
+        box.removeEventListener("click", handleCardClick);
+      }
+      setTimeout(() => {
         previousTarget.style.backgroundColor = "";
         event.target.style.backgroundColor = "";
         previousTarget = null;
+        for (let box of boxes) {
+          box.addEventListener("click", handleCardClick);
+        }
       }, 1000);
     }
   }
