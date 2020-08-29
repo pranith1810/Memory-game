@@ -30,16 +30,16 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   border-radius: 2%;
-  margin: 5rem;
-  width: 70%;
-  height: 50%;
+  margin: 2rem;
+  width: 40%;
+  height: 40%;
 }
 
 #game div {
-  flex: 1 1 10%;
+  flex: 1 1 20%;
   box-shadow: 5px 10px 2px 2px  #322f3d;
   border : 3px dotted #322f3d;
-  height: 10rem;
+  height: 5rem;
   margin: 1rem;
 }
 
