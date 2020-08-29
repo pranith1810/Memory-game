@@ -58,48 +58,60 @@ function createDivsForColors(colorArray) {
   }
 }
 
-let previousTarget = null;
 // TODO: Implement this function!
 function handleCardClick(event) {
-  // you can use event.target to see which element was clicked
   event.target.style.backgroundColor = event.target.classList[0];
+  event.target.classList.add("clicked");
+  for (let box of boxes) {
+    if (box !== event.target && box.classList.contains("clicked")) {
+      checkBoxMatch(box, event.target);
+      break;
+    }
+  }
+}
 
-  if (previousTarget === null) {
-    previousTarget = event.target;
+function checkBoxMatch(previousTarget, currentTarget) {
+  // you can use currentTarget to see which element was clicked
+
+  if (previousTarget.classList[0] === currentTarget.classList[0]) {
+    currentTarget.classList.add("matched");
+    previousTarget.classList.add("matched");
+    previousTarget.removeEventListener("click", handleCardClick);
+    currentTarget.removeEventListener("click", handleCardClick);
+    previousTarget.classList.remove("clicked");
+    currentTarget.classList.remove("clicked");
+    let flag = 1;
+    for (let box of boxes) {
+      if (box.style.backgroundColor === "") {
+        flag = 0;
+        break;
+      }
+    }
+    if (flag === 1) {
+      setTimeout(() => {
+        alert("You have won the game!!!!");
+      }, 1);
+
+    }
   }
   else {
-    if (previousTarget.classList[0] === event.target.classList[0]) {
-      previousTarget = null;
-      let flag = 1;
-      for (let box of boxes) {
-        if (box.style.backgroundColor === "") {
-          flag = 0;
-          break;
-        }
-      }
-      if (flag === 1) {
-        setTimeout(() => {
-          alert("You have won the game!!!!");
-        }, 1);
-
-      }
-    }
-    else {
-      for (let box of boxes) {
+    for (let box of boxes) {
+      if (!box.classList.contains("matched"))
         box.removeEventListener("click", handleCardClick);
-      }
-      setTimeout(() => {
-        previousTarget.style.backgroundColor = "";
-        event.target.style.backgroundColor = "";
-        previousTarget = null;
-        for (let box of boxes) {
-          box.addEventListener("click", handleCardClick);
-        }
-      }, 1000);
     }
+    setTimeout(() => {
+      previousTarget.style.backgroundColor = "";
+      currentTarget.style.backgroundColor = "";
+      previousTarget.classList.remove("clicked");
+      currentTarget.classList.remove("clicked");
+      for (let box of boxes) {
+        if (!box.classList.contains("matched"))
+          box.addEventListener("click", handleCardClick);
+      }
+    }, 1000);
   }
-
 }
+
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
