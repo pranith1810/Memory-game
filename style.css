@@ -42,3 +42,20 @@ h3 {
   height: 10rem;
   margin: 1rem;
 }
+
+#restart {
+  display: none;
+  color: #2d4059;
+  font-size: 2em;
+  height : 2em;
+  width: 5em;
+  cursor: pointer;
+  border: none;
+  border-radius: 10%;
+  background-color: #fff;
+}
+
+
+#restart:hover{
+  background-color: #91d18b;
+}

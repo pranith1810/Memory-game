@@ -1,5 +1,6 @@
 const gameContainer = document.getElementById("game");
 let boxes = gameContainer.children;
+const restartButton = document.getElementById("restart");
 
 const imagesList = [
   "img1",
@@ -74,6 +75,7 @@ function createDivsForImages(imageArray) {
 
 // TODO: Implement this function!
 function handleCardClick(event) {
+  restartButton.style.display = "block";
   event.target.style.backgroundImage = `url(gifs/${event.target.classList[0]}.gif)`;
   event.target.style.backgroundSize = "contain";
   event.target.classList.add("clicked");
@@ -127,6 +129,14 @@ function checkIfImageMatch(previousTarget, currentTarget) {
   }
 }
 
+restartButton.addEventListener("click", function (event) {
+  while (boxes.length > 0) {
+    boxes[0].remove();
+  }
+  shuffledImages = shuffle(imagesList);
+  createDivsForImages(shuffledImages);
+
+});
 
 // when the DOM loads
 createDivsForImages(shuffledImages);
