@@ -1,4 +1,4 @@
-const gameContainer = document.getElementsById("game");
+const gameContainer = document.getElementById("game");
 
 const COLORS = [
   "red",
@@ -57,10 +57,34 @@ function createDivsForColors(colorArray) {
   }
 }
 
+let previousTarget = null;
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  console.log("you clicked",event.target);
+  // console.log("you clicked",event.target);
+
+  event.target.style.backgroundColor = event.target.classList[0];
+
+  if (previousTarget === null){
+    previousTarget = event.target;
+    console.log(previousTarget);
+  }
+  else{
+    console.log(previousTarget);
+    console.log(event.target);
+    if(previousTarget.classList[0] === event.target.classList[0]){
+      previousTarget = null;
+    }
+    else{
+      
+      setTimeout(()=>{
+        previousTarget.style.backgroundColor = 'white';
+        event.target.style.backgroundColor = 'white';
+        previousTarget = null;
+      }, 1000);
+    }
+  }
+
 }
 
 // when the DOM loads
