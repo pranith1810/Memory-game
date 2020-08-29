@@ -1,17 +1,31 @@
 const gameContainer = document.getElementById("game");
 let boxes = gameContainer.children;
 
-const COLORS = [
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple",
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple"
+const imagesList = [
+  "img1",
+  "img2",
+  "img3",
+  "img4",
+  "img5",
+  "img6",
+  "img7",
+  "img8",
+  "img9",
+  "img10",
+  "img11",
+  "img12",
+  "img1",
+  "img2",
+  "img3",
+  "img4",
+  "img5",
+  "img6",
+  "img7",
+  "img8",
+  "img9",
+  "img10",
+  "img11",
+  "img12"
 ];
 
 // here is a helper function to shuffle an array
@@ -37,18 +51,18 @@ function shuffle(array) {
   return array;
 }
 
-let shuffledColors = shuffle(COLORS);
+let shuffledImages = shuffle(imagesList);
 
 // this function loops over the array of colors
 // it creates a new div and gives it a class with the value of the color
 // it also adds an event listener for a click for each card
-function createDivsForColors(colorArray) {
-  for (let color of colorArray) {
+function createDivsForImages(imageArray) {
+  for (let image of imageArray) {
     // create a new div
     const newDiv = document.createElement("div");
 
     // give it a class attribute for the value we are looping over
-    newDiv.classList.add(color);
+    newDiv.classList.add(image);
 
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
@@ -60,17 +74,18 @@ function createDivsForColors(colorArray) {
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-  event.target.style.backgroundColor = event.target.classList[0];
+  event.target.style.backgroundImage = `url(gifs/${event.target.classList[0]}.gif)`;
+  event.target.style.backgroundSize = "contain";
   event.target.classList.add("clicked");
   for (let box of boxes) {
     if (box !== event.target && box.classList.contains("clicked")) {
-      checkBoxMatch(box, event.target);
+      checkIfImageMatch(box, event.target);
       break;
     }
   }
 }
 
-function checkBoxMatch(previousTarget, currentTarget) {
+function checkIfImageMatch(previousTarget, currentTarget) {
   // you can use currentTarget to see which element was clicked
 
   if (previousTarget.classList[0] === currentTarget.classList[0]) {
@@ -82,7 +97,7 @@ function checkBoxMatch(previousTarget, currentTarget) {
     currentTarget.classList.remove("clicked");
     let flag = 1;
     for (let box of boxes) {
-      if (box.style.backgroundColor === "") {
+      if (box.style.backgroundImage === "") {
         flag = 0;
         break;
       }
@@ -90,7 +105,7 @@ function checkBoxMatch(previousTarget, currentTarget) {
     if (flag === 1) {
       setTimeout(() => {
         alert("You have won the game!!!!");
-      }, 1);
+      }, 10);
 
     }
   }
@@ -100,8 +115,8 @@ function checkBoxMatch(previousTarget, currentTarget) {
         box.removeEventListener("click", handleCardClick);
     }
     setTimeout(() => {
-      previousTarget.style.backgroundColor = "";
-      currentTarget.style.backgroundColor = "";
+      previousTarget.style.backgroundImage = "";
+      currentTarget.style.backgroundImage = "";
       previousTarget.classList.remove("clicked");
       currentTarget.classList.remove("clicked");
       for (let box of boxes) {
@@ -114,4 +129,4 @@ function checkBoxMatch(previousTarget, currentTarget) {
 
 
 // when the DOM loads
-createDivsForColors(shuffledColors);
+createDivsForImages(shuffledImages);
