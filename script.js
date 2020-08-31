@@ -70,6 +70,7 @@ function createDivsForImages(imageArray) {
   for (const image of imageArray) {
     // create a new div
     const newDiv = document.createElement('div');
+    newDiv.style.backgroundImage = 'url(gifs/qmark.png)';
 
     // give it a class attribute for the value we are looping over
     newDiv.classList.add(image);
@@ -99,7 +100,7 @@ function checkIfImageMatch(previousTarget, currentTarget) {
     currentTarget.classList.remove('clicked');
     let flag = 1;
     for (const box of boxes) {
-      if (box.style.backgroundImage === '') {
+      if (!box.classList.contains('matched')) {
         flag = 0;
         break;
       }
@@ -120,8 +121,8 @@ function checkIfImageMatch(previousTarget, currentTarget) {
       }
     }
     setTimeout(() => {
-      previousTarget.style.backgroundImage = '';
-      currentTarget.style.backgroundImage = '';
+      previousTarget.style.backgroundImage = 'url(gifs/qmark.png)';
+      currentTarget.style.backgroundImage = 'url(gifs/qmark.png)';
       previousTarget.classList.remove('clicked');
       currentTarget.classList.remove('clicked');
       for (const box of boxes) {
@@ -140,7 +141,6 @@ function checkIfImageMatch(previousTarget, currentTarget) {
 function handleCardClick(event) {
   restartButton.style.display = 'block';
   event.target.style.backgroundImage = `url(gifs/${event.target.classList[0]}.gif)`;
-  event.target.style.backgroundSize = 'contain';
   event.target.classList.add('clicked');
   for (const box of boxes) {
     if (box !== event.target && box.classList.contains('clicked')) {

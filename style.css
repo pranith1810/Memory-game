@@ -37,19 +37,18 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   border-radius: 2%;
-  border-top: 0.6em solid;
-  border-left: 0.6em solid;
-  margin: 2rem;
-  width: 40%;
-  height: 40%;
+  margin: 1rem;
+  width: 80%;
 }
 
 #game div {
-  flex: 1 1 25%;
-  border-bottom: 0.6em solid;
-  border-right: 0.6em solid;
-  height: 5rem;
-
+  flex: 1 1 10%;
+  border: 0.2em solid;
+  margin : 2rem;
+  height: 10rem;
+  border-radius: 10%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #restart {
@@ -61,6 +60,7 @@ h1 {
   cursor: pointer;
   border: none;
   border-radius: 10%;
+  margin: 2rem;
   background-color: #fff;
 }
 
