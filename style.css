@@ -18,29 +18,38 @@ body {
 h1 {
   margin: 1rem;
   color: #0f4c75;
+  font-size: 5em;
 }
 
-h3 {
+#slogan{
   margin: 0.5rem;
   color: #0f4c75;
+  font-size: 3em;
+}
+
+.score {
+  margin: 0.5rem;
+  color: #cd0a0a;
 }
 
 #game {
-  background-color: #848ccf;
+  background-color: #bbd196;
   display: flex;
   flex-wrap: wrap;
   border-radius: 2%;
+  border-top: 0.6em solid;
+  border-left: 0.6em solid;
   margin: 2rem;
   width: 40%;
   height: 40%;
 }
 
 #game div {
-  flex: 1 1 20%;
-  box-shadow: 5px 10px 2px 2px  #322f3d;
-  border : 3px dotted #322f3d;
+  flex: 1 1 25%;
+  border-bottom: 0.6em solid;
+  border-right: 0.6em solid;
   height: 5rem;
-  margin: 1rem;
+
 }
 
 #restart {
