@@ -50,8 +50,8 @@ h1 {
   border-radius: 10%;
   background-image: url('gifs/qmark.png');
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-
 }
 
 #restart {
