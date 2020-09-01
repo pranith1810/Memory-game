@@ -4,6 +4,7 @@
 const gameContainer = document.getElementById('game');
 const boxes = gameContainer.children;
 const restartButton = document.getElementById('restart');
+const startButton = document.getElementById('start');
 const score = document.getElementById('score');
 const lowestClicks = document.getElementById('lowest-clicks');
 
@@ -70,7 +71,6 @@ function createDivsForImages(imageArray) {
   for (const image of imageArray) {
     // create a new div
     const newDiv = document.createElement('div');
-    newDiv.style.backgroundImage = 'url(gifs/qmark.png)';
 
     // give it a class attribute for the value we are looping over
     newDiv.classList.add(image);
@@ -139,7 +139,6 @@ function checkIfImageMatch(previousTarget, currentTarget) {
  * @param {event} event event object of the click
  */
 function handleCardClick(event) {
-  restartButton.style.display = 'block';
   event.target.style.backgroundImage = `url(gifs/${event.target.classList[0]}.gif)`;
   event.target.classList.add('clicked');
   for (const box of boxes) {
@@ -153,6 +152,7 @@ function handleCardClick(event) {
 }
 
 restartButton.addEventListener('click', handleRestartClick);
+startButton.addEventListener('click', handleStartClick);
 
 /**
  * Handles the click event for click event listener of restart button
@@ -167,8 +167,11 @@ function handleRestartClick() {
   score.innerText = clicks.toString();
 }
 
-// when the DOM loads
-createDivsForImages(shuffledImages);
+function handleStartClick() {
+  createDivsForImages(shuffledImages);
+  startButton.style.display = 'none';
+  restartButton.style.display = 'block';
+}
 
 if (localStorage.getItem('lowestClicks') === null) {
   localStorage.setItem('lowestClicks', '0');
